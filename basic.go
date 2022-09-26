@@ -31,7 +31,7 @@ func calculateProfit() {
 	*/
 	fmt.Printf("请输入当月利润: ")
 	var profit float64
-	fmt.Scanln(&profit)
+	_, _ = fmt.Scanln(&profit)
 	var bonus float64
 	switch {
 	case profit > 1000000:
@@ -79,7 +79,7 @@ func judgeDate() {
 	// 输入某年某月某日，判断这一天是这一年的第几天？
 	fmt.Println("请输入日期, (某年某月某日)")
 	var datetimeStr string
-	fmt.Scan(&datetimeStr)
+	_, _ = fmt.Scan(&datetimeStr)
 	yearSplit := strings.Split(datetimeStr, "年")
 	yearStr := yearSplit[0]
 	var year, _ = strconv.ParseInt(yearStr, 0, 0)
@@ -198,7 +198,7 @@ func statisticalStringCharCount() {
 	fmt.Printf("请输入一个字符串, 可包含英文字母、空格、数字和其它字符")
 	var str string
 	i, j, k, l, m := 0, 0, 0, 0, 0
-	fmt.Scan(&str)
+	_, _ = fmt.Scan(&str)
 	for _, ch := range str {
 		switch {
 		case ch >= 'A' && ch <= 'Z':
