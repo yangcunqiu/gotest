@@ -216,6 +216,22 @@ func statisticalStringCharCount() {
 	fmt.Printf("共%d个字符, 小写字母%d个, 大写字母%d个, 空格%d个, 数字%d个, 其他字符%d个", i+j+k+l+m, i, j, k, l, m)
 }
 
+func fibonacci() {
+	// 求出斐波那契数 第0项是0，第1项是第一个1。此数列从第2项开始，每一项都等于前两项之和。
+	// 0、1、1、2、3、5、8、13、21、34、55、89、144、233、377、610、987、1597、2584、4181、6765、10946、17711、28657、46368…
+	fmt.Println("请输入n")
+	var n int
+	_, _ = fmt.Scanf("%d", &n)
+	fmt.Println(fibonacciFun(n))
+}
+
+func fibonacciFun(n int) int {
+	if n == 0 || n == 1 {
+		return n
+	}
+	return fibonacciFun(n-1) + fibonacciFun(n-2)
+}
+
 func main() {
 	// numberCombinations()
 	// calculateProfit()
@@ -225,5 +241,6 @@ func main() {
 	// printMultiplicationTable()
 	// judgePrimeNumber()
 	// daffodilNumber()
-	statisticalStringCharCount()
+	// statisticalStringCharCount()
+	fibonacci()
 }
