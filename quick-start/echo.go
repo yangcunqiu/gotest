@@ -40,28 +40,45 @@ func practice3() {
 	fmt.Printf("frugal time : %d ms", lowTime-highTime)
 }
 
+func echo1() {
+	var s, sep string
+	for i := 1; i < len(os.Args); i++ {
+		s += sep + os.Args[i]
+		sep = " "
+	}
+	fmt.Println(s)
+}
+
+func echo2() {
+	s, sep := "", ""
+	for _, arg := range os.Args[1:] {
+		s += sep + arg
+		sep = " "
+	}
+	fmt.Println(s)
+}
+
+func echo3() {
+	fmt.Println(strings.Join(os.Args[1:], " "))
+}
+
 func echo() {
 	// os包以跨平台的方式，提供了一些与操作系统交互的函数和变量。程序的命令行参数可从os包的Args变量获取；os包外部使用os.Args访问该变量。
 	// 下面是Unix里echo命令的一份实现，echo把它的命令行参数打印成一行
-	var s1, sep string
-	for i := 1; i < len(os.Args); i++ {
-		s1 += sep + os.Args[i]
-		sep = " "
-	}
-	fmt.Println(s1)
+	echo1()
+
 	// for循环的另一种形式，在某种数据类型的区间（range）上遍历，如字符串或切片。echo的第二版本展示了这种形式：
-	s2, sep := "", ""
-	for _, arg := range os.Args[1:] {
-		s2 += sep + arg
-		sep = " "
-	}
-	fmt.Println(s2)
+	echo2()
+
 	// 上面这两种如果连接涉及的数据量很大，这种方式代价高昂。一种简单且高效的解决方案是使用strings包的Join函数
-	fmt.Println(strings.Join(os.Args[1:], " "))
+	echo3()
+
 	// 练习 1.1： 修改echo程序，使其能够打印os.Args[0]，即被执行命令本身的名字。
 	practice1()
+
 	// 练习 1.2： 修改echo程序，使其打印每个参数的索引和值，每个一行
 	practice2()
+
 	// 练习 1.3： 做实验测量潜在低效的版本和使用了strings.Join的版本的运行时间差异。（1.6节讲解了部分time包，11.4节展示了如何写标准测试程序，以得到系统性的性能评测
 	practice3()
 }
