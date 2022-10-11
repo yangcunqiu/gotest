@@ -20,5 +20,8 @@ func main() {
 	//webService()
 
 	// 数组
-	array()
+	//array()
+
+	// slice
+	slice()
 }
