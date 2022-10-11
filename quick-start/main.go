@@ -14,5 +14,11 @@ func main() {
 	// fetch()
 
 	// 并发获取url
-	fetchAll()
+	//fetchAll()
+
+	// web服务
+	//webService()
+
+	// 数组
+	array()
 }
