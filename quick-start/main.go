@@ -23,5 +23,26 @@ func main() {
 	//array()
 
 	// slice
-	slice()
+	//slice()
+
+	// map
+	//mapTest()
+
+	// struct
+	//structTest()
+
+	// json
+	//jsonTest()
+
+	// func
+	//funcTest()
+
+	// error
+	//errorTest()
+
+	// defer
+	//deferTest()
+
+	// recover
+	recoverTest()
 }
