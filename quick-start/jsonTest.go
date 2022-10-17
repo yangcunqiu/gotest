@@ -9,11 +9,11 @@ type Hobby struct {
 	HobbyName string
 }
 
-type User struct {
-	Name string
-	Age  int
-	Hobby
-}
+//type User struct {
+//	Name string
+//	Age  int
+//	Hobby
+//}
 
 func jsonTest() {
 	//user := User{Name: "ycq", Age: 0}

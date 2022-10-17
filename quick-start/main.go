@@ -44,5 +44,11 @@ func main() {
 	//deferTest()
 
 	// recover
-	recoverTest()
+	//recoverTest()
+
+	// method
+	//methodTest()
+
+	// interface
+	interfaceTest()
 }
