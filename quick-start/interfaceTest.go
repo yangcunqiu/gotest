@@ -33,8 +33,14 @@ func test(p Person) {
 }
 
 func interfaceTest() {
-	//var u *User
-	var u Person
-	fmt.Println(u == nil)
-	test(u)
+	var p Person = User{"xm", 1}
+	person, ok := p.(Person)
+	fmt.Println(person, ok)
+
+	athlete, ok := p.(Athlete)
+	fmt.Println(athlete, ok)
+
+	if per, ok := p.(Person); ok {
+		fmt.Println(per, ok)
+	}
 }
