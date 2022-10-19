@@ -50,5 +50,11 @@ func main() {
 	//methodTest()
 
 	// interface
-	interfaceTest()
+	//interfaceTest()
+
+	// goroutine
+	//goroutineTest()
+
+	// channel
+	channelTest()
 }
