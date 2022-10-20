@@ -56,5 +56,8 @@ func main() {
 	//goroutineTest()
 
 	// channel
-	channelTest()
+	//channelTest()
+
+	// concurrency
+	concurrencyTest()
 }
