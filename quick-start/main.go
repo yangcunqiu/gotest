@@ -59,5 +59,8 @@ func main() {
 	//channelTest()
 
 	// concurrency
-	concurrencyTest()
+	//concurrencyTest()
+
+	// 锁
+	//mutexTest()
 }
