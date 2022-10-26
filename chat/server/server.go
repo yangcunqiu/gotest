@@ -9,6 +9,7 @@ import (
 
 var lastClientAddr string
 var coonMap = make(map[string]net.Conn)
+var waitSendMessageMap = make(map[string][]string)
 var coonAddrSlice = make([]string, 10)
 
 func main() {
@@ -64,6 +65,9 @@ func process(conn net.Conn) {
 	// 广播当前在线客户端地址
 	broadcast()
 
+	// 发送留言
+	sendWaitMessage(conn)
+
 	for {
 		buf := make([]byte, 1024)
 		n, err := conn.Read(buf)
@@ -94,19 +98,42 @@ func process(conn net.Conn) {
 	}
 }
 
+func sendWaitMessage(conn net.Conn) {
+	clientAddr := conn.RemoteAddr().String()
+	for addr, messageSlice := range waitSendMessageMap {
+		if addr == clientAddr {
+			var waitMessage string
+			for _, message := range messageSlice {
+				waitMessage += message
+			}
+			err := send(conn, waitMessage)
+			if err != nil {
+				fmt.Printf("给客户端发送消息失败, err=%v", err)
+			}
+		}
+	}
+	waitSendMessageMap[clientAddr] = nil
+}
+
 func sendClient(conn net.Conn, message string) {
 	clientAddr := conn.RemoteAddr().String()
 	// 解析出目的地址
 	split := strings.Split(message, "|")
 	destAddr := split[0][1:]
 	destCoon := coonMap[destAddr]
+	destMessage := clientAddr + ":\n" + split[1]
 	if destCoon != nil {
-		destMessage := clientAddr + ":\n" + split[1]
+		// 对方在线 直接发送
 		err := send(destCoon, destMessage)
 		if err != nil {
 			fmt.Printf("客户端[%v] -> 客户端[%v]发送消息失败, err=%v", clientAddr, destAddr, err)
 		}
 		fmt.Printf("客户端[%v] -> 客户端[%v]发送消息, 消息内容=%v", clientAddr, destAddr, destMessage)
+	} else {
+		// 对方不在线 保存到等待发送的map
+		waitSendMessage := destMessage
+		waitSendMessageMap[destAddr] = make([]string, 10)
+		waitSendMessageMap[destAddr] = append(waitSendMessageMap[destAddr], waitSendMessage)
 	}
 }
 

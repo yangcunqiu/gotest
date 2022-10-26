@@ -5,12 +5,21 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strconv"
 	"time"
 )
 
 func main() {
 	// 连接服务器
-	conn, err := net.Dial("tcp", "127.0.0.1:8080")
+	//conn, err := net.Dial("tcp", "127.0.0.1:8080")
+	// 指定自己的端口(读取os.Args)
+	portInt64, _ := strconv.ParseInt(os.Args[1], 10, 64)
+	port := int(portInt64)
+	fmt.Printf("本地端口:[%v]\n", port)
+	netAddr := &net.TCPAddr{Port: port}
+	dialer := net.Dialer{LocalAddr: netAddr}
+	conn, err := dialer.Dial("tcp", "127.0.0.1:8080")
+
 	if err != nil {
 		fmt.Printf("连接服务器失败, err=%v", err)
 		return
